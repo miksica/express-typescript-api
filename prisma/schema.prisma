@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Customer {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  firstname String
+  lastname  String
+}
+
+model Item {
+  id              Int               @id @default(autoincrement())
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  isTrending      Boolean
+  name            String
+  price           Int
+  tax             Float
+  itemCategory    ItemCategory      @relation(fields: [itemCategoryId], references: [id], onDelete: Cascade)
+  itemCategoryId  Int
+  ItemsJoinStores ItemsJoinStores[]
+}
+
+model ItemCategory {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  category  String
+  Item      Item[]
+}
+
+model Store {
+  id              Int               @id @default(autoincrement())
+  location        String
+  isOpen          Boolean
+  ItemsJoinStores ItemsJoinStores[]
+}
+
+model ItemsJoinStores {
+  id       Int   @id @default(autoincrement())
+  item     Item  @relation(fields: [itemId], references: [id])
+  itemId   Int
+  store    Store @relation(fields: [storeId], references: [id])
+  storeId  Int
+  quantity Int
+}
