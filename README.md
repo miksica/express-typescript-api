@@ -44,4 +44,4 @@ npm test
 
 > Note: They didint run witout the jest.config.ts and than some pushing required, only made true by the tsconfig.json auto created via the `npx tsc --init`
 
-hint: [getting started]("https://www.youtube.com/watch?v=PM58NEMJgMw&t=2430s")
+hint: [getting started](https://www.youtube.com/watch?v=PM58NEMJgMw)
