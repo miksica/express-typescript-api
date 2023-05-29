@@ -112,7 +112,6 @@ async function seed() {
                     price,
                     tax,
                     itemCategoryId: categories[index]?.id,
-                    ItemsJoinStores: undefined
                 },
             });
         })
